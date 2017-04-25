@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BarDar</string>
+    <string name="bars">Bars</string>
+    <string name="map">Map</string>
+    <string name="f_distance_m" formatted="false">"%1$.2fm"</string>
+    <string name="f_distance_km" formatted="false">"%1$.2fkm"</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="not_now">Not now</string>
+    <string name="missing_location_permission_title">Where you at?!</string>
+    <string name="missing_location_permission_body">To use location-based features, go to settings and allow BarDar permission to use your location.</string>
+    <string name="missing_location_rationale_body">This app needs your location in order to work out where you are</string>
+
+</resources>
