@@ -21,8 +21,6 @@ import java.util.List;
 
 public class BarListFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private BarsAdapter mAdapter;
     private List<Place> mBars;
     private Location mLocation;
 
@@ -46,12 +44,11 @@ public class BarListFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mAdapter = new BarsAdapter(mBars, mLocation);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        if (((GridLayoutManager) mRecyclerView.getLayoutManager()).getSpanCount() > 1) {
-            mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setAdapter(new BarsAdapter(mBars, mLocation));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        if (((GridLayoutManager) recyclerView.getLayoutManager()).getSpanCount() > 1) {
+            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         }
     }
 

@@ -6,28 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.barryirvine.tide.placepicker.R;
-import com.barryirvine.tide.placepicker.api.BarsService;
 import com.barryirvine.tide.placepicker.model.Place;
-import com.barryirvine.tide.placepicker.model.PlaceResponse;
-import com.barryirvine.tide.placepicker.ui.activity.MainActivity;
 import com.barryirvine.tide.placepicker.ui.adapter.BarsPagerAdapter;
-import com.barryirvine.tide.placepicker.viewmodel.PlaceViewModel;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class BarsPagerFragment extends Fragment{

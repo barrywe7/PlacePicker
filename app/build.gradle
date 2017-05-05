@@ -24,13 +24,15 @@ android {
 ext {
     supportLibraryVersion = '25.3.1'
     retrofitVersion = "2.2.0"
-    playServicesVersion = "10.2.1"
+    playServicesVersion = "10.2.4"
+    daggerVersion = "2.10"
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.google.code.findbugs'
     })
     compile "com.android.support:design:$supportLibraryVersion"
     compile "com.google.android.gms:play-services-maps:$playServicesVersion"
@@ -41,5 +43,9 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    compile "com.google.dagger:dagger:$daggerVersion"
+    compile "com.google.dagger:dagger-android:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
     testCompile 'junit:junit:4.12'
 }

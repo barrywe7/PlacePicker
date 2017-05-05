@@ -17,8 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.widget.Toast;
 
+import com.barryirvine.tide.placepicker.App;
 import com.barryirvine.tide.placepicker.R;
-import com.barryirvine.tide.placepicker.api.BarsService;
+import com.barryirvine.tide.placepicker.api.BarsAPI;
 import com.barryirvine.tide.placepicker.model.Place;
 import com.barryirvine.tide.placepicker.model.PlaceResponse;
 import com.barryirvine.tide.placepicker.ui.fragment.BarsPagerFragment;
@@ -37,15 +38,22 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, ResultCallback<LocationSettingsResult> {
 
     private static final int REQUEST_LOCATION_SETTING = 1234;
+    @Inject
+    Retrofit mRetrofit;
+
     private ArrayList<Place> mPlaces;
     private Location mLocation;
     private GoogleApiClient mLocationClient;
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        ((App) getApplication()).getNetComponent().inject(this);
         RuntimePermissionUtils.checkForPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 new RuntimePermissionUtils.CheckPermissionListener() {
@@ -118,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements
 
     private void getBars() {
         if (mLocation != null) {
-            BarsService.get().getNearbyBars(mLocation.getLatitude() + "," + mLocation.getLongitude(), 1500, getString(R.string.web_api_key))
+            ((App) getApplication()).getNetComponent().inject(this);
+            mRetrofit.create(BarsAPI.class).getNearbyBars(mLocation.getLatitude() + "," + mLocation.getLongitude(), 1500, getString(R.string.web_api_key))
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
