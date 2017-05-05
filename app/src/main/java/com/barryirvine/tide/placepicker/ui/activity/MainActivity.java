@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements
 
     private void getBars() {
         if (mLocation != null) {
-            ((App) getApplication()).getNetComponent().inject(this);
             mRetrofit.create(BarsAPI.class).getNearbyBars(mLocation.getLatitude() + "," + mLocation.getLongitude(), 1500, getString(R.string.web_api_key))
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
